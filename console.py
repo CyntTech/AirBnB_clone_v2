@@ -37,7 +37,6 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
-
         Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
         (Brackets denote optional fields in usage example.)
         """
@@ -116,16 +115,16 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """ Create an object of any class"""
         try:
-        if not args:
-            raise SyntaxError()
-        arg_list = args.split(" ")
-        kw = {}
-        for arg in arg_list[1;]:
-            arg_splited = arg.split("=")
-            arg_splited[1] = eval(arg_splited[1])
-            if type(arg_splited[1]) is str:
-                arg_splited[1] = arg_splited[1].replace("_", " ").replace('"', '\\"')
-            kw[arg_splited[0]] = arg_splited[1]
+            if not args:
+                raise SyntaxError()
+            arg_list = args.split(" ")
+            kw = {}
+            for arg in arg_list[1:]:
+                arg_splited = arg.split("=")
+                arg_splited[1] = eval(arg_splited[1])
+                if type(arg_splited[1]) is str:
+                    arg_splited[1] = arg_splited[1].replace("_", " ").replace('"', '\\"')
+                kw[arg_splited[0]] = arg_splited[1]
         except SyntaxError:
             print("** class name missing **")
         except NameError:
