@@ -6,7 +6,7 @@ Routes:
     /hbnb: Displays 'HBNB'.
     /c/<text>: Displays 'C' followed by the value of <text>.
 """
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -24,10 +24,10 @@ def hbnb():
 
 
 @app.route("/c/<text>", strict_slashes=False)
-def c(text):
+def c_text(text):
     """Displays 'C' followed by the value of <text>."""
     text = text.replace("_", " ")
-    return "C {}".format(text)
+    return ("C {}").format(text)
 
 
 @app.route("/python", strict_slashes=False)
@@ -41,13 +41,13 @@ def python(text="is cool"):
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
-def number(n):
+def number_route(n):
     """Displays 'n is a number' only if n is an integer."""
-    return "{} is a number".format(n)
+    return ("{} is a number").format(n)
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
-lef number_template_route(n):
+def number_template_route(n):
     """Displays an HTML page only if <n> is an integer."""
     return render_template("5-number.html", n=n)
 
